@@ -1,7 +1,7 @@
 {
   "master": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-quikdescribe-master-90ae1-authRole",
+      "AuthRoleName": "amplify- -master-90ae1-authRole",
       "UnauthRoleArn": "arn:aws:iam::988839728996:role/amplify-quikdescribe-master-90ae1-unauthRole",
       "AuthRoleArn": "arn:aws:iam::988839728996:role/amplify-quikdescribe-master-90ae1-authRole",
       "Region": "ap-south-1",
