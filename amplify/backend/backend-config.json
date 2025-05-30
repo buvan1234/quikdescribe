@@ -1,1 +1,43 @@
-{}
+{
+  "api": {
+    "quikdecrib": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "quikdescrib"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "quikdescrib": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_quikdescrib_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "quikdescrib"
+        }
+      ]
+    },
+    "AMPLIFY_function_quikdescrib_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "quikdescrib"
+        }
+      ]
+    }
+  }
+}
