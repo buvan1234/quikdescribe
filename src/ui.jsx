@@ -46,6 +46,7 @@ const AwsServiceFinder = () => {
       const { body } = await restOperation.response;
       const json = await body.text();
       console.log('GET call succeeded: ', json);
+      setSelectedService(json);
     } catch (e) {
       console.log('GET call failed: ', e.response ? JSON.parse(e.response) : e);
     }
@@ -65,8 +66,8 @@ const AwsServiceFinder = () => {
 
   useEffect(() => {
     if (contentType === 'description' && selectedService) {
-      const message = `${selectedService} is an AWS service that helps you build, scale, and manage cloud apps.`;
-      let i = 0;
+      const message = selectedService;
+      let i = -1;
       setTypedText('');
       const speed = 40;//  
       
