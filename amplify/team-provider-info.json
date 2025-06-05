@@ -15,7 +15,7 @@
       "function": {
         "quikdescrib": {
           "deploymentBucketName": "amplify-quikdescribe-master-90ae1-deployment",
-          "s3Key": "amplify-builds/quikdescrib-7a4b7a70324d7a306e6b-build.zip"
+          "s3Key": "amplify-builds/quikdescrib-477a61485132595a3155-build.zip"
         }
       },
       "api": {

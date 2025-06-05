@@ -27,6 +27,8 @@ const AwsServiceFinder = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [contentType, setContentType] = useState(null);
   const [typedText, setTypedText] = useState('');
+  const [description, setDescription] = useState('');
+
   const matches = services.filter(service =>
     service.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -43,38 +45,40 @@ const AwsServiceFinder = () => {
           }
         }
       });
-      const { body } = await restOperation.response;
-      const json = await body.text();
-      console.log('GET call succeeded: ', json);
-      setSelectedService(json);
+      const { body } = await restOperation.response;  
+      const json = await body.json();
+      console.log('GET call succeeded: ', json); 
+      setDescription(json.results[0].outputText);
     } catch (e) {
-      console.log('GET call failed: ', e.response ? JSON.parse(e.response) : e);
+      console.log('GET call failed: ', 'Maybe the API is down,The service name is invalid,You have a network issue');
+
     }
   }
 
   const handleSelectService = (service) => {
     setSelectedService(service);
     setSearchValue('');
-    setContentType(null);
+    setContentType('');
+    setDescription('');
+    setTypedText('');
     getTodo(service); // Call API with selected service
   };
 
   const handleBack = () => {
     setSelectedService(null);
     setTypedText('');
+    setDescription('');
+    setContentType(null);
   };
 
   useEffect(() => {
-    if (contentType === 'description' && selectedService) {
-      const message = selectedService;
-      let i = -1;
-      setTypedText('');
-      const speed = 40;//  
-      
+    if (contentType === 'description' && description) {
+      let i = 0;
+      const speed = 30;
 
       function typeChar() {
-        if (i < message.length) {
-          setTypedText(prev => prev + message.charAt(i));
+        if (i < description.length) {
+          setTypedText(prev => prev + description.charAt(i));
           i++;
           setTimeout(typeChar, speed);
         }
@@ -82,11 +86,10 @@ const AwsServiceFinder = () => {
 
       typeChar();
     }
-  }, [contentType, selectedService]);
+  }, [contentType, description]);
 
   return (
     <div className={`app ${selectedService ? 'details-mode' : 'search-mode'}`}>
-      <button className="mode-toggle" onClick={() => document.body.classList.toggle('dark')}>🌓</button>
 
       {!selectedService ? (
         <div id="main" className="page search-page active">
